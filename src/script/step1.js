@@ -3,7 +3,7 @@ const app = {
 		'The old man',
 		'The young boy',
 		'The man in the street',
-		'The old place',
+		'The old master',
 		'Everyone in the city',
 		'No one here',
 	],
@@ -42,3 +42,16 @@ const app = {
 		return arr[Math.floor(Math.random() * arr.length)];
 	},
 };
+
+// generate the quote and log it
+const randomQuote = app.generateQuote();
+console.log(randomQuote)
+
+// generate button when clicked
+// change the ui blockquote to have a random quote text on it
+const generatorButton = document.getElementById('btn_generator');
+generatorButton.addEventListener('click',()=>{
+    // generate random quote
+    // change the text of the block text
+    document.getElementById('quote-text').innerHTML = app.generateQuote() ;
+})
