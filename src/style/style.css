@@ -1,0 +1,36 @@
+:root {
+    --color_0 : #f6f2ff;
+    --color_1:#C8AEFB;
+    --color_2: #9B6DF7;
+    --color_3 : #5913E4;
+    --color_4 : #3F00BD;
+    --color_5 : #2D0087;
+
+}
+html {
+    box-sizing: border-box;
+}
+*,*::before,*::after {
+    box-sizing: inherit;
+    margin: 0;
+}
+header {
+    text-align: center;
+    background-color: var(--color_3);
+    color:var(--color_0);
+    padding: 10px 0;
+}
+main {
+    margin-top: 30px;
+    text-align: center;
+}
+h2 {
+    font-size: 2rem;
+}
+.versions {
+    margin-top: 20px;
+    font-size: x-large;
+}
+a {
+    margin: 20px;
+}
