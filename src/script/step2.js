@@ -138,6 +138,7 @@ btn.addEventListener('click', () => {
 function updateUI(arr) {
     // select the quote-list element
     const quoteList = document.querySelector('.quote-list') ;
+    quoteList.innerHTML = '' ; 
     for (let element of arr) {
         const div = document.createElement('div');
         div.innerHTML = element ;
