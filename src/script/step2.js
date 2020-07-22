@@ -115,18 +115,24 @@ const btn = document.getElementById('generate_btn');
 btn.addEventListener('click', () => {
 	// number of quotes chosen by the user
 	const numberOfQuotesToGenerate = parseInt(
-		document.querySelector('[name=num_quotes]:checked'),
+		document.querySelector('[name=num_quotes]:checked').value,
 	);
 	// type of generator one or two
-	const generatorType = parseInt(document.querySelector('[name=type]:checked'));
+	const generatorType = parseInt(document.querySelector('[name=type]:checked').value);
 
 	app.setValues(numberOfQuotesToGenerate,generatorType);
-    updateUI(app.generateRandomQuotes());
+
+	// generate the random quotes
+    const randomQuotes = app.generateRandomQuotes() ;
+    console.log(randomQuotes);
+	// reflect the changes on the user interface
+    updateUI(randomQuotes)
+
 });
 
 /**
  * update the user interface and create the div elements
- * for the list 
+ * for the list
  * @param arr {Array}
  */
 function updateUI(arr) {
@@ -136,5 +142,6 @@ function updateUI(arr) {
         const div = document.createElement('div');
         div.innerHTML = element ;
         quoteList.appendChild(div) ;
+        console.log('what')
     }
 }
