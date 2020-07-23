@@ -118,16 +118,17 @@ btn.addEventListener('click', () => {
 		document.querySelector('[name=num_quotes]:checked').value,
 	);
 	// type of generator one or two
-	const generatorType = parseInt(document.querySelector('[name=type]:checked').value);
+	const generatorType = parseInt(
+		document.querySelector('[name=type]:checked').value,
+	);
 
-	app.setValues(numberOfQuotesToGenerate,generatorType);
+	app.setValues(numberOfQuotesToGenerate, generatorType);
 
 	// generate the random quotes
-    const randomQuotes = app.generateRandomQuotes() ;
-    console.log(randomQuotes);
+	const randomQuotes = app.generateRandomQuotes();
+	console.log(randomQuotes);
 	// reflect the changes on the user interface
-    updateUI(randomQuotes)
-
+	updateUI(randomQuotes);
 });
 
 /**
@@ -136,28 +137,46 @@ btn.addEventListener('click', () => {
  * @param arr {Array}
  */
 function updateUI(arr) {
-    // select the quote-list element
-    const quoteList = document.querySelector('.quote-list') ;
-    quoteList.innerHTML = '' ; 
-    for (let element of arr) {
-        const div = document.createElement('div');
-        div.className = 'quote-item';
-        // paragraph that will hold the text of the quote
-        const p = document.createElement('p') ;
-        p.innerText = element ;
+	// select the quote-list element
+	const quoteList = document.querySelector('.quote-list');
+	quoteList.innerHTML = '';
+	for (let element of arr) {
+		const div = document.createElement('div');
+		div.className = 'quote-item';
+		// paragraph that will hold the text of the quote
+		const p = document.createElement('p');
+		p.innerText = element;
 
-        // image icon to copy the content when clicked
-        const copySpan = document.createElement('span');
-        copySpan.className = 'copy-icon' ;
-        const imgIcon = document.createElement('img') ;
-        imgIcon.className = 'copy-image' ;
-        imgIcon.src = './img/copy-4.png';
-        imgIcon.title = 'click to copy';
-        imgIcon.alt = 'copy to clipboard' ;
-        copySpan.appendChild(imgIcon)  ;
-
-        div.appendChild(p) ;
-        div.appendChild(copySpan) ;
-        quoteList.appendChild(div);
-    }
+		// image icon to copy the content when clicked
+		const copySpan = document.createElement('span');
+		copySpan.className = 'copy-icon';
+		const imgIcon = document.createElement('img');
+		imgIcon.className = 'copy-image';
+		imgIcon.src = './img/copy-4.png';
+		imgIcon.title = 'click to copy';
+		imgIcon.alt = 'copy to clipboard';
+		copySpan.appendChild(imgIcon);
+		// when  span icon clicked
+		// copy the text and show a toast notification
+		copySpan.addEventListener('click', () => {
+			const toast = document.getElementById('snackbar');
+			const input = document.createElement('textarea');
+			input.value = element;
+			input.setAttribute('readonly', '');
+			input.style.position = 'absolute';
+			input.style.left = '-9999px';
+			document.body.append(input)
+			input.select();
+			const result = document.execCommand('copy');
+			console.log(result);
+			document.body.removeChild(input)
+			toast.className = 'show';
+			setTimeout(function () {
+				toast.className = toast.className.replace('show', '');
+			}, 500);
+		});
+		div.appendChild(p);
+		div.appendChild(copySpan);
+		quoteList.appendChild(div);
+	}
 }
