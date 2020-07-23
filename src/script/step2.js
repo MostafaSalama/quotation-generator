@@ -141,8 +141,23 @@ function updateUI(arr) {
     quoteList.innerHTML = '' ; 
     for (let element of arr) {
         const div = document.createElement('div');
-        div.innerHTML = element ;
-        quoteList.appendChild(div) ;
-        console.log('what')
+        div.className = 'quote-item';
+        // paragraph that will hold the text of the quote
+        const p = document.createElement('p') ;
+        p.innerText = element ;
+
+        // image icon to copy the content when clicked
+        const copySpan = document.createElement('span');
+        copySpan.className = 'copy-icon' ;
+        const imgIcon = document.createElement('img') ;
+        imgIcon.className = 'copy-image' ;
+        imgIcon.src = './img/copy-4.png';
+        imgIcon.title = 'click to copy';
+        imgIcon.alt = 'copy to clipboard' ;
+        copySpan.appendChild(imgIcon)  ;
+
+        div.appendChild(p) ;
+        div.appendChild(copySpan) ;
+        quoteList.appendChild(div);
     }
 }
